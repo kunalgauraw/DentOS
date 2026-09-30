@@ -24,9 +24,20 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if username is None:
         raise credentials_exception
     user = db.query(User).filter(User.username == username).first()
-    if user is None:
+    if user is None or not user.is_active:
         raise credentials_exception
     return user
+
+def require_role(*roles: str):
+    """Dependency factory: allow only users whose role is in `roles`."""
+    def checker(current_user: User = Depends(get_current_user)) -> User:
+        if current_user.role not in roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to perform this action",
+            )
+        return current_user
+    return checker
 
 @router.post("/login", response_model=Token)
 def login(login_data: LoginRequest, db: Session = Depends(get_db)):

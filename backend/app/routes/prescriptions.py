@@ -3,10 +3,15 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from app.core import get_db
-from app.models import Prescription, Visit, Patient
+from app.models import Prescription, Visit, User
 from app.schemas import PrescriptionCreate, PrescriptionResponse
+from app.routes.auth import get_current_user
 
-router = APIRouter(prefix="/prescriptions", tags=["Prescriptions"])
+router = APIRouter(
+    prefix="/prescriptions",
+    tags=["Prescriptions"],
+    dependencies=[Depends(get_current_user)],
+)
 
 def generate_prescription_id(db: Session) -> str:
     last_rx = db.query(Prescription).order_by(Prescription.id.desc()).first()
@@ -39,22 +44,31 @@ def get_prescription(prescription_id: int, db: Session = Depends(get_db)):
     return prescription
 
 @router.post("/", response_model=PrescriptionResponse)
-def create_prescription(rx_data: PrescriptionCreate, db: Session = Depends(get_db)):
+def create_prescription(
+    rx_data: PrescriptionCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     # Verify visit exists
     visit = db.query(Visit).filter(Visit.id == rx_data.visit_id).first()
     if not visit:
         raise HTTPException(status_code=404, detail="Visit not found")
+    if visit.patient_id != rx_data.patient_id:
+        raise HTTPException(status_code=400, detail="Visit does not belong to this patient")
     
     prescription_id = generate_prescription_id(db)
     
     # Convert medicines to dict for JSON storage
     medicines_data = [med.model_dump() for med in rx_data.medicines]
     
+    # RX-005: prescriber captured from session (fall back to visit's doctor)
+    doctor_id = rx_data.doctor_id or visit.doctor_id or current_user.id
+    
     prescription = Prescription(
         prescription_id=prescription_id,
         visit_id=rx_data.visit_id,
         patient_id=rx_data.patient_id,
-        doctor_id=rx_data.doctor_id,
+        doctor_id=doctor_id,
         medicines=medicines_data,
         notes=rx_data.notes
     )

@@ -18,6 +18,9 @@ engine = create_engine(
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+ADMIN = {"username": "testadmin", "password": "testpass123"}
+RECEPTIONIST = {"username": "reception", "password": "reception123"}
+
 
 def override_get_db():
     try:
@@ -32,20 +35,27 @@ def db():
     """Create a fresh database for each test"""
     Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
-    
-    # Create test admin user
-    admin = User(
-        username="testadmin",
-        password_hash=get_password_hash("testpass123"),
-        full_name="Test Admin",
-        role=UserRole.ADMIN,
-        mobile="9999999999"
-    )
-    db.add(admin)
+
+    db.add_all([
+        User(
+            username=ADMIN["username"],
+            password_hash=get_password_hash(ADMIN["password"]),
+            full_name="Test Admin",
+            role=UserRole.ADMIN,
+            mobile="9999999999",
+        ),
+        User(
+            username=RECEPTIONIST["username"],
+            password_hash=get_password_hash(RECEPTIONIST["password"]),
+            full_name="Front Desk",
+            role=UserRole.RECEPTIONIST,
+            mobile="9999999998",
+        ),
+    ])
     db.commit()
-    
+
     yield db
-    
+
     db.close()
     Base.metadata.drop_all(bind=engine)
 
@@ -54,19 +64,38 @@ def db():
 def client(db):
     """Create a test client with database override"""
     app.dependency_overrides[get_db] = override_get_db
-    
+
     with TestClient(app) as test_client:
         yield test_client
-    
+
     app.dependency_overrides.clear()
+
+
+def _login(client, creds):
+    response = client.post("/auth/login", json=creds)
+    assert response.status_code == 200, response.text
+    return {"Authorization": f"Bearer {response.json()['access_token']}"}
 
 
 @pytest.fixture
 def auth_headers(client):
-    """Get authentication headers for API calls"""
+    """Admin auth headers"""
+    return _login(client, ADMIN)
+
+
+@pytest.fixture
+def receptionist_headers(client):
+    """Receptionist (non-admin) auth headers"""
+    return _login(client, RECEPTIONIST)
+
+
+@pytest.fixture
+def patient(client, auth_headers):
+    """A saved patient, returned as the API response dict"""
     response = client.post(
-        "/auth/login",
-        json={"username": "testadmin", "password": "testpass123"}
+        "/patients/",
+        json={"full_name": "Fixture Patient", "mobile": "9000000001", "gender": "female", "age": 28},
+        headers=auth_headers,
     )
-    token = response.json()["access_token"]
-    return {"Authorization": f"Bearer {token}"}
+    assert response.status_code == 200, response.text
+    return response.json()

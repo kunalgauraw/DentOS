@@ -6,8 +6,13 @@ from typing import Optional
 
 from app.core import get_db
 from app.models import Patient, Visit, Invoice, Payment
+from app.routes.auth import get_current_user
 
-router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
+router = APIRouter(
+    prefix="/dashboard",
+    tags=["Dashboard"],
+    dependencies=[Depends(get_current_user)],
+)
 
 @router.get("/stats")
 def get_dashboard_stats(db: Session = Depends(get_db)):
