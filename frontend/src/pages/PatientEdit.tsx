@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getPatient, updatePatient } from '../services/api';
+import { apiErrorMessage } from './PatientForm';
 
 const PatientEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -90,7 +91,7 @@ const PatientEdit: React.FC = () => {
       });
       navigate(`/patients/${id}`);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to update patient');
+      setError(apiErrorMessage(err, 'Failed to update patient'));
     } finally {
       setIsSaving(false);
     }

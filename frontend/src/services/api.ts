@@ -53,6 +53,11 @@ export const getPatient = async (id: number) => {
   return response.data;
 };
 
+export const checkMobile = async (mobile: string) => {
+  const response = await api.get('/patients/check-mobile', { params: { mobile } });
+  return response.data;
+};
+
 export const createPatient = async (data: any) => {
   const response = await api.post('/patients', data);
   return response.data;
@@ -101,8 +106,8 @@ export const createPrescription = async (data: any) => {
 };
 
 // Invoices
-export const getInvoices = async (patientId?: number, status?: string) => {
-  const response = await api.get('/invoices', { params: { patient_id: patientId, status } });
+export const getInvoices = async (patientId?: number, status?: string, visitId?: number) => {
+  const response = await api.get('/invoices', { params: { patient_id: patientId, status, visit_id: visitId } });
   return response.data;
 };
 

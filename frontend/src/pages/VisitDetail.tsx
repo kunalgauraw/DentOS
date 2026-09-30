@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getVisit, getPatient, getPrescriptions, getInvoices } from '../services/api';
+import { getVisit, getPatient, getPrescriptions, getInvoices, getInvoice } from '../services/api';
 
 const VisitDetail: React.FC = () => {
   const { patientId, visitId } = useParams<{ patientId: string; visitId: string }>();
@@ -32,16 +32,14 @@ const VisitDetail: React.FC = () => {
         // Fetch related prescription and invoice
         const [prescriptions, invoices] = await Promise.all([
           getPrescriptions(parseInt(patientId!), parseInt(visitId!)),
-          getInvoices(parseInt(patientId!)),
+          getInvoices(parseInt(patientId!), undefined, parseInt(visitId!)),
         ]);
         
         if (prescriptions.length > 0) {
           setPrescription(prescriptions[0]);
         }
-        
-        const visitInvoice = invoices.find((inv: any) => inv.visit_id === parseInt(visitId!));
-        if (visitInvoice) {
-          setInvoice(visitInvoice);
+        if (invoices.length > 0) {
+          setInvoice(await getInvoice(invoices[0].id));
         }
       } catch (error) {
         console.error('Error fetching data:', error);

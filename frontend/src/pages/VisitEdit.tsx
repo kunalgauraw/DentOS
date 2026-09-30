@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getPatient, getVisit, updateVisit, getPrescriptions } from '../services/api';
-
-interface Medicine {
-  name: string;
-  dosage: string;
-  frequency: string;
-  duration: string;
-  instructions: string;
-}
+import { getPatient, getVisit, updateVisit } from '../services/api';
 
 const VisitEdit: React.FC = () => {
   const { patientId, visitId } = useParams<{ patientId: string; visitId: string }>();

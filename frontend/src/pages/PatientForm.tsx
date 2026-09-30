@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createPatient } from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
+import { createPatient, checkMobile } from '../services/api';
+
+/** Turn a FastAPI error payload (string or 422 list) into one readable line */
+export const apiErrorMessage = (err: any, fallback: string): string => {
+  const detail = err?.response?.data?.detail;
+  if (!detail) return fallback;
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    return detail.map((d: any) => (d.msg || '').replace(/^Value error, /, '')).join('. ');
+  }
+  return fallback;
+};
 
 const PatientForm: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showMore, setShowMore] = useState(false);
+  const [duplicates, setDuplicates] = useState<any[]>([]);
 
   const [formData, setFormData] = useState({
     full_name: '',
@@ -26,6 +38,20 @@ const PatientForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // PAT-004: warn (don't block) if another patient already uses this mobile
+  const handleMobileBlur = async () => {
+    const digits = formData.mobile.replace(/\D/g, '');
+    if (digits.length !== 10) {
+      setDuplicates([]);
+      return;
+    }
+    try {
+      setDuplicates(await checkMobile(digits));
+    } catch {
+      setDuplicates([]);
+    }
   };
 
   const validateForm = (): string | null => {
@@ -74,7 +100,7 @@ const PatientForm: React.FC = () => {
       const patient = await createPatient(data);
       navigate(`/patients/${patient.id}`);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to create patient');
+      setError(apiErrorMessage(err, 'Failed to create patient'));
     } finally {
       setIsLoading(false);
     }
@@ -123,10 +149,26 @@ const PatientForm: React.FC = () => {
                   placeholder="Enter mobile number"
                   value={formData.mobile}
                   onChange={handleChange}
+                  onBlur={handleMobileBlur}
+                  maxLength={10}
+                  inputMode="numeric"
                   required
                 />
               </div>
             </div>
+
+            {duplicates.length > 0 && (
+              <div className="alert alert-warning">
+                <strong>Note:</strong> this mobile is already registered to{' '}
+                {duplicates.map((p, i) => (
+                  <span key={p.id}>
+                    {i > 0 && ', '}
+                    <Link to={`/patients/${p.id}`}>{p.full_name} ({p.patient_id})</Link>
+                  </span>
+                ))}
+                . You can still continue if this is a family member.
+              </div>
+            )}
 
             <div className="form-row">
               <div className="form-group">
