@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -16,32 +17,7 @@ from app.routes import (
 # Create tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.VERSION,
-    description="Dental Practice Management System"
-)
 
-# CORS middleware - allow all origins for development
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-)
-
-# Include routers
-app.include_router(auth_router)
-app.include_router(patients_router)
-app.include_router(visits_router)
-app.include_router(prescriptions_router)
-app.include_router(invoices_router)
-app.include_router(payments_router)
-app.include_router(dashboard_router)
-
-@app.on_event("startup")
 def create_default_user():
     """Create default admin user if not exists"""
     db = SessionLocal()
@@ -62,6 +38,39 @@ def create_default_user():
             print("Default admin user created: admin / admin123")
     finally:
         db.close()
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    create_default_user()
+    yield
+
+
+app = FastAPI(
+    title=settings.APP_NAME,
+    version=settings.VERSION,
+    description="Dental Practice Management System",
+    lifespan=lifespan,
+)
+
+# CORS middleware - allow all origins for development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+)
+
+# Include routers
+app.include_router(auth_router)
+app.include_router(patients_router)
+app.include_router(visits_router)
+app.include_router(prescriptions_router)
+app.include_router(invoices_router)
+app.include_router(payments_router)
+app.include_router(dashboard_router)
 
 @app.get("/")
 def root():

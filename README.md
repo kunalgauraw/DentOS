@@ -61,6 +61,8 @@ A standalone Windows application for managing dental clinic operations - patient
 ```bash
 # 1. Start Backend
 cd backend
+python -m venv .venv
+.venv\Scripts\activate          # Windows  (macOS/Linux: source .venv/bin/activate)
 pip install -r requirements.txt
 python -m uvicorn app.main:app --reload --port 8000
 
@@ -68,6 +70,20 @@ python -m uvicorn app.main:app --reload --port 8000
 cd frontend
 npm install
 npm run dev
+```
+
+The SQLite database is created at `data/dentos.db` on first run (path is absolute, independent of the working directory).
+
+### Run Tests
+
+```bash
+# Backend (86 tests)
+cd backend
+python -m pytest tests/ -q
+
+# Frontend (11 tests)
+cd frontend
+npm run test:run
 ```
 
 ### Access
