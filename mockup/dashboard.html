@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .search-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .search-hero h2 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .search-hero-input {
+            display: flex;
+            gap: 10px;
+        }
+        .search-hero-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .search-hero-input input:focus {
+            outline: 3px solid rgba(255,255,255,0.3);
+        }
+        .quick-actions-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .quick-actions-bar .btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        .quick-actions-bar .btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .queue-card {
+            border-left: 4px solid var(--primary);
+        }
+        .queue-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-200);
+            gap: 15px;
+        }
+        .queue-item:last-child {
+            border-bottom: none;
+        }
+        .queue-item:hover {
+            background: var(--gray-50);
+        }
+        .queue-number {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .queue-number.active {
+            background: var(--primary);
+            color: white;
+        }
+        .queue-number.done {
+            background: var(--success);
+            color: white;
+        }
+        .queue-info {
+            flex: 1;
+        }
+        .queue-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .queue-meta {
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+        .today-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .today-stat {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+        .today-stat .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .today-stat .label {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-menu" style="margin-left: auto;">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Dentist</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Search Hero -->
+                <div class="search-hero">
+                    <h2>🔍 Find Patient</h2>
+                    <div class="search-hero-input">
+                        <input type="text" placeholder="Search by name or mobile number..." autofocus>
+                        <button class="btn btn-primary" style="background: white; color: var(--primary);">Search</button>
+                    </div>
+                    <div class="quick-actions-bar">
+                        <a href="patient-new.html" class="btn btn-sm">➕ New Patient</a>
+                        <a href="appointment-new.html" class="btn btn-sm">📅 Book Appointment</a>
+                        <a href="billing.html" class="btn btn-sm">💰 Collect Payment</a>
+                    </div>
+                </div>
+
+                <!-- Today's Stats -->
+                <div class="today-stats">
+                    <div class="today-stat">
+                        <div class="number">12</div>
+                        <div class="label">Today's Appointments</div>
+                    </div>
+                    <div class="today-stat">
+                        <div class="number" style="color: var(--warning);">4</div>
+                        <div class="label">Waiting</div>
+                    </div>
+                    <div class="today-stat">
+                        <div class="number" style="color: var(--success);">6</div>
+                        <div class="label">Completed</div>
+                    </div>
+                    <div class="today-stat">
+                        <div class="number" style="color: var(--success);">₹15,500</div>
+                        <div class="label">Today's Collection</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Today's Queue -->
+                    <div class="card queue-card">
+                        <div class="card-header flex-between">
+                            <span>📋 Today's Queue</span>
+                            <span class="badge badge-primary">4 waiting</span>
+                        </div>
+                        <div class="card-body" style="padding: 0;">
+                            <!-- Waiting -->
+                            <div class="queue-item" style="background: var(--warning-light);">
+                                <div class="queue-number active">1</div>
+                                <div class="queue-info">
+                                    <div class="queue-name"><a href="patient-profile.html">Ramesh Prasad Yadav</a></div>
+                                    <div class="queue-meta">10:00 AM • Waiting 15 min • Consultation</div>
+                                </div>
+                                <a href="consultation.html" class="btn btn-sm btn-primary">▶ Start</a>
+                            </div>
+                            <div class="queue-item" style="background: var(--warning-light);">
+                                <div class="queue-number active">2</div>
+                                <div class="queue-info">
+                                    <div class="queue-name"><a href="patient-profile.html">Sunita Devi</a></div>
+                                    <div class="queue-meta">10:30 AM • Waiting 5 min • Follow-up</div>
+                                </div>
+                                <a href="consultation.html" class="btn btn-sm btn-outline">Start</a>
+                            </div>
+                            <div class="queue-item" style="background: var(--warning-light);">
+                                <div class="queue-number active">3</div>
+                                <div class="queue-info">
+                                    <div class="queue-name"><a href="patient-profile.html">Mukesh Kumar Singh</a></div>
+                                    <div class="queue-meta">10:45 AM • Just arrived • RCT</div>
+                                </div>
+                                <a href="consultation.html" class="btn btn-sm btn-outline">Start</a>
+                            </div>
+                            <div class="queue-item" style="background: var(--warning-light);">
+                                <div class="queue-number active">4</div>
+                                <div class="queue-info">
+                                    <div class="queue-name"><a href="patient-profile.html">Rina Kumari</a></div>
+                                    <div class="queue-meta">11:00 AM • Just arrived • Extraction</div>
+                                </div>
+                                <a href="consultation.html" class="btn btn-sm btn-outline">Start</a>
+                            </div>
+
+                            <!-- Completed -->
+                            <div class="queue-item" style="opacity: 0.7;">
+                                <div class="queue-number done">✓</div>
+                                <div class="queue-info">
+                                    <div class="queue-name">Ajay Kumar Sharma</div>
+                                    <div class="queue-meta">09:30 AM • Completed • ₹800 paid</div>
+                                </div>
+                                <span class="badge badge-success">Done</span>
+                            </div>
+                            <div class="queue-item" style="opacity: 0.7;">
+                                <div class="queue-number done">✓</div>
+                                <div class="queue-info">
+                                    <div class="queue-name">Poonam Devi</div>
+                                    <div class="queue-meta">09:00 AM • Completed • ₹500 paid</div>
+                                </div>
+                                <span class="badge badge-success">Done</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div>
+                        <!-- Upcoming Appointments -->
+                        <div class="card">
+                            <div class="card-header flex-between">
+                                <span>📅 Later Today</span>
+                                <a href="appointments.html" class="text-muted" style="font-size: 12px;">View All →</a>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>11:30 AM</td>
+                                            <td><a href="patient-profile.html">Santosh Kumar Gupta</a></td>
+                                            <td><span class="badge badge-primary">Consultation</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>12:00 PM</td>
+                                            <td><a href="patient-profile.html">Mamta Kumari</a></td>
+                                            <td><span class="badge badge-warning">Follow-up</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>02:00 PM</td>
+                                            <td><a href="patient-profile.html">Ravi Shankar Mishra</a></td>
+                                            <td><span class="badge badge-success">Procedure</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>03:00 PM</td>
+                                            <td><a href="patient-profile.html">Anita Devi</a></td>
+                                            <td><span class="badge badge-primary">Consultation</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Pending Payments -->
+                        <div class="card">
+                            <div class="card-header flex-between">
+                                <span>⚠️ Pending Payments</span>
+                                <span class="badge badge-danger">₹13,500</span>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Mukesh Kumar Singh</a></td>
+                                            <td class="text-danger">₹8,500</td>
+                                            <td><a href="payment.html" class="btn btn-sm btn-primary">Collect</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Ramesh Prasad Yadav</a></td>
+                                            <td class="text-danger">₹3,000</td>
+                                            <td><a href="payment.html" class="btn btn-sm btn-primary">Collect</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Poonam Devi</a></td>
+                                            <td class="text-danger">₹2,000</td>
+                                            <td><a href="payment.html" class="btn btn-sm btn-primary">Collect</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Follow-ups Due -->
+                        <div class="card">
+                            <div class="card-header flex-between">
+                                <span>📞 Follow-ups Due</span>
+                                <span class="badge badge-warning">3</span>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Santosh Kumar Gupta</a></td>
+                                            <td class="text-muted">RCT Review</td>
+                                            <td><span class="badge badge-danger">Overdue</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Meena Devi</a></td>
+                                            <td class="text-muted">Crown fitting</td>
+                                            <td><span class="badge badge-warning">Today</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="patient-profile.html">Dinesh Kumar</a></td>
+                                            <td class="text-muted">Post-extraction</td>
+                                            <td><span class="badge badge-primary">Tomorrow</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

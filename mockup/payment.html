@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collect Payment - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item active">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Dentist</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <a href="billing.html" class="back-link">← Back to Billing</a>
+
+                <div class="page-header">
+                    <h1 class="page-title">Collect Payment</h1>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Invoice Details -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">Invoice Details</div>
+                            <div class="card-body">
+                                <div class="flex-between mb-10">
+                                    <span class="text-muted">Invoice Number</span>
+                                    <strong>INV-000789</strong>
+                                </div>
+                                <div class="flex-between mb-10">
+                                    <span class="text-muted">Patient</span>
+                                    <strong>Ramesh Prasad Yadav (PAT-000123)</strong>
+                                </div>
+                                <div class="flex-between mb-10">
+                                    <span class="text-muted">Invoice Date</span>
+                                    <span>15 Jan 2024</span>
+                                </div>
+                                <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--gray-200);">
+                                <div class="flex-between mb-10">
+                                    <span class="text-muted">Invoice Total</span>
+                                    <strong>₹8,000</strong>
+                                </div>
+                                <div class="flex-between mb-10">
+                                    <span class="text-muted">Already Paid</span>
+                                    <span class="text-success">₹5,000</span>
+                                </div>
+                                <div class="flex-between">
+                                    <span class="text-muted">Balance Due</span>
+                                    <strong class="text-danger" style="font-size: 20px;">₹3,000</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Payment History</div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Mode</th>
+                                            <th>Receipt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>15 Jan 2024</td>
+                                            <td>₹5,000</td>
+                                            <td>UPI</td>
+                                            <td><a href="#">RCP-000456</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">New Payment</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Amount <span class="required">*</span></label>
+                                    <div class="flex gap-10">
+                                        <input type="number" class="form-control" value="3000" style="flex: 1;">
+                                        <button class="btn btn-outline">Pay Full (₹3,000)</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Payment Mode <span class="required">*</span></label>
+                                    <div class="radio-group" style="flex-wrap: wrap;">
+                                        <label class="radio-item">
+                                            <input type="radio" name="mode" value="cash"> Cash
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="mode" value="upi" checked> UPI
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="mode" value="card"> Card
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="mode" value="bank"> Bank Transfer
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Reference Number</label>
+                                    <input type="text" class="form-control" placeholder="Transaction ID / Reference">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" rows="2" placeholder="Payment notes..."></textarea>
+                                </div>
+
+                                <div class="alert alert-success" style="margin-top: 20px;">
+                                    <span>✅</span>
+                                    After this payment, invoice will be marked as <strong>PAID</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons" style="border: none; padding: 0;">
+                            <a href="billing.html" class="btn btn-secondary">Cancel</a>
+                            <button class="btn btn-primary">💰 Collect & Print Receipt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

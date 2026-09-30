@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item active">📅 Appointments</a>
+                <a href="billing.html" class="nav-item">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search appointments...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Dentist</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">Appointments</h1>
+                    <button class="btn btn-primary">➕ New Appointment</button>
+                </div>
+
+                <!-- Calendar Header -->
+                <div class="card mb-20">
+                    <div class="card-body">
+                        <div class="calendar-header">
+                            <div class="flex gap-10">
+                                <button class="btn btn-outline btn-sm">← Prev</button>
+                                <button class="btn btn-outline btn-sm">Today</button>
+                                <button class="btn btn-outline btn-sm">Next →</button>
+                            </div>
+                            <h2>January 2024</h2>
+                            <div class="flex gap-10">
+                                <button class="btn btn-sm btn-outline">Day</button>
+                                <button class="btn btn-sm btn-primary">Week</button>
+                                <button class="btn btn-sm btn-outline">Month</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="calendar-grid">
+                    <div class="calendar-day">
+                        <div class="calendar-day-header">Mon 15</div>
+                        <div class="calendar-day-content">
+                            <div class="calendar-event">
+                                09:00 - Ramesh P.<br>
+                                <small>Consultation</small>
+                            </div>
+                            <div class="calendar-event">
+                                10:00 - Sunita D.<br>
+                                <small>Follow-up</small>
+                            </div>
+                            <div class="calendar-event">
+                                11:00 - Mukesh K.<br>
+                                <small>Procedure</small>
+                            </div>
+                            <div class="calendar-event">
+                                02:00 - Rina K.<br>
+                                <small>Consultation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-header">Tue 16</div>
+                        <div class="calendar-day-content">
+                            <div class="calendar-event">
+                                09:00 - Ajay K.<br>
+                                <small>Consultation</small>
+                            </div>
+                            <div class="calendar-event">
+                                10:30 - Poonam D.<br>
+                                <small>Follow-up</small>
+                            </div>
+                            <div class="calendar-event">
+                                03:00 - Santosh G.<br>
+                                <small>Procedure</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-header">Wed 17</div>
+                        <div class="calendar-day-content">
+                            <div class="calendar-event">
+                                10:00 - Mamta K.<br>
+                                <small>Consultation</small>
+                            </div>
+                            <div class="calendar-event">
+                                11:30 - Ravi S.<br>
+                                <small>Follow-up</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-header">Thu 18</div>
+                        <div class="calendar-day-content">
+                            <div class="calendar-event">
+                                09:00 - Anita D.<br>
+                                <small>Consultation</small>
+                            </div>
+                            <div class="calendar-event">
+                                10:00 - Dinesh K.<br>
+                                <small>Procedure</small>
+                            </div>
+                            <div class="calendar-event">
+                                02:30 - Chandan P.<br>
+                                <small>Follow-up</small>
+                            </div>
+                            <div class="calendar-event">
+                                04:00 - Neha R.<br>
+                                <small>Consultation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="calendar-day-header">Fri 19</div>
+                        <div class="calendar-day-content">
+                            <div class="calendar-event">
+                                09:30 - Kiran S.<br>
+                                <small>Consultation</small>
+                            </div>
+                            <div class="calendar-event">
+                                11:00 - Meena G.<br>
+                                <small>Procedure</small>
+                            </div>
+                            <div class="calendar-event">
+                                03:00 - Pramod H.<br>
+                                <small>Follow-up</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's List View -->
+                <div class="card mt-20">
+                    <div class="card-header flex-between">
+                        <span>Today's Appointments - January 15, 2024</span>
+                        <span class="badge badge-primary">12 appointments</span>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Patient</th>
+                                    <th>Type</th>
+                                    <th>Doctor</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>09:00 AM</td>
+                                    <td><a href="patient-profile.html">Rina Kumari</a></td>
+                                    <td><span class="badge badge-primary">Consultation</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>09:30 AM</td>
+                                    <td><a href="patient-profile.html">Mukesh Kumar Singh</a></td>
+                                    <td><span class="badge badge-success">Procedure</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-primary">In Progress</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr style="background: var(--warning-light);">
+                                    <td>10:00 AM</td>
+                                    <td><a href="patient-profile.html"><strong>Ramesh Prasad Yadav</strong></a></td>
+                                    <td><span class="badge badge-primary">Consultation</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-warning">Waiting</span></td>
+                                    <td>
+                                        <a href="consultation.html" class="btn btn-sm btn-primary">Start</a>
+                                    </td>
+                                </tr>
+                                <tr style="background: var(--warning-light);">
+                                    <td>10:30 AM</td>
+                                    <td><a href="patient-profile.html"><strong>Sunita Devi</strong></a></td>
+                                    <td><span class="badge badge-warning">Follow-up</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-warning">Waiting</span></td>
+                                    <td>
+                                        <a href="consultation.html" class="btn btn-sm btn-primary">Start</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>11:00 AM</td>
+                                    <td><a href="patient-profile.html">Ajay Kumar Sharma</a></td>
+                                    <td><span class="badge badge-primary">Consultation</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-secondary">Scheduled</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline">Check-in</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>11:30 AM</td>
+                                    <td><a href="patient-profile.html">Poonam Devi</a></td>
+                                    <td><span class="badge badge-warning">Follow-up</span></td>
+                                    <td>Dr. Aditya</td>
+                                    <td><span class="badge badge-secondary">Scheduled</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline">Check-in</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Invoice - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .gst-note {
+            background: var(--gray-100);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .gst-note strong {
+            color: var(--primary);
+        }
+        .doctor-select {
+            background: var(--primary-light);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item active">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Dentist</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <a href="billing.html" class="back-link">← Back to Billing</a>
+
+                <div class="page-header">
+                    <h1 class="page-title">New Invoice</h1>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Invoice Form -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">Patient & Doctor</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Patient <span class="required">*</span></label>
+                                        <select class="form-control">
+                                            <option>Select patient...</option>
+                                            <option selected>Ramesh Prasad Yadav (PAT-000123)</option>
+                                            <option>Sunita Devi (PAT-000124)</option>
+                                            <option>Mukesh Kumar Singh (PAT-000125)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Invoice Date</label>
+                                        <input type="date" class="form-control" value="2024-01-15">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Treating Doctor</label>
+                                    <select class="form-control">
+                                        <option selected>Dr. Aditya Gaurav</option>
+                                        <option>Dr. Abhay Kumar Singh (Visiting)</option>
+                                    </select>
+                                    <small class="text-muted">For revenue tracking by doctor</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Line Items</div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th style="width: 80px;">Qty</th>
+                                            <th style="width: 120px;">Rate</th>
+                                            <th style="width: 120px;">Amount</th>
+                                            <th style="width: 50px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" class="form-control" value="Consultation Fee"></td>
+                                            <td><input type="number" class="form-control" value="1"></td>
+                                            <td><input type="number" class="form-control" value="500"></td>
+                                            <td>₹500</td>
+                                            <td><button class="btn btn-sm btn-danger">X</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" value="Root Canal Treatment #16"></td>
+                                            <td><input type="number" class="form-control" value="1"></td>
+                                            <td><input type="number" class="form-control" value="8000"></td>
+                                            <td>₹8,000</td>
+                                            <td><button class="btn btn-sm btn-danger">X</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" value="X-Ray"></td>
+                                            <td><input type="number" class="form-control" value="1"></td>
+                                            <td><input type="number" class="form-control" value="300"></td>
+                                            <td>₹300</td>
+                                            <td><button class="btn btn-sm btn-danger">X</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 10px;">
+                                    + Add Line Item
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Notes</div>
+                            <div class="card-body">
+                                <textarea class="form-control" rows="2" placeholder="Invoice notes (optional)...">Discount for regular patient</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">Invoice Summary</div>
+                            <div class="card-body">
+                                <div class="invoice-summary">
+                                    <div class="invoice-row">
+                                        <span>Subtotal</span>
+                                        <span>₹8,800</span>
+                                    </div>
+                                    <div class="invoice-row">
+                                        <span>
+                                            Discount
+                                            <input type="number" class="form-control" style="width: 80px; display: inline; padding: 5px; margin-left: 10px;" value="800" placeholder="₹">
+                                        </span>
+                                        <span class="text-danger">-₹800</span>
+                                    </div>
+                                    <div class="invoice-row">
+                                        <span>After Discount</span>
+                                        <span>₹8,000</span>
+                                    </div>
+                                    <div class="invoice-row">
+                                        <span>
+                                            GST @ 
+                                            <select class="form-control" style="width: 100px; display: inline; padding: 5px;">
+                                                <option selected>0% (Exempt)</option>
+                                                <option>5%</option>
+                                                <option>12%</option>
+                                                <option>18%</option>
+                                            </select>
+                                        </span>
+                                        <span>₹0</span>
+                                    </div>
+                                    <div class="invoice-row total">
+                                        <span>Grand Total</span>
+                                        <span>₹8,000</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="gst-note">
+                                    <strong>GSTIN:</strong> 10AABCG1234R1ZX<br>
+                                    <span class="text-muted">Most dental treatments are GST exempt (healthcare services). Select 18% for cosmetic procedures.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Patient Info</div>
+                            <div class="card-body">
+                                <p><strong>Ramesh Prasad Yadav</strong></p>
+                                <p class="text-muted">PAT-000123</p>
+                                <p class="text-muted">98525 12345</p>
+                                <p class="text-muted">Maharajganj, Chapra</p>
+                                <p class="mt-10">
+                                    <strong>Outstanding Balance:</strong> 
+                                    <span class="text-danger">₹3,000</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons" style="border: none; padding: 0;">
+                            <a href="billing.html" class="btn btn-secondary">Cancel</a>
+                            <button class="btn btn-outline">Save Draft</button>
+                            <button class="btn btn-primary">Create Invoice</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

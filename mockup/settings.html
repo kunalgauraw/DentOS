@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item active">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search settings...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Admin</div>
+                        <div class="role">Administrator</div>
+                    </div>
+                    <div class="avatar">AD</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">Settings</h1>
+                </div>
+
+                <!-- Settings Tabs -->
+                <div class="tabs">
+                    <a href="#" class="tab active">Clinic</a>
+                    <a href="#" class="tab">Backup</a>
+                    <a href="users.html" class="tab">Users</a>
+                    <a href="#" class="tab">Preferences</a>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Clinic Information -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">Clinic Information</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Clinic Name <span class="required">*</span></label>
+                                        <input type="text" class="form-control" value="Gauravam Denta Clinic">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Clinic Logo</label>
+                                        <div class="flex gap-10" style="align-items: center;">
+                                            <div style="width: 60px; height: 60px; background: var(--primary-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🦷</div>
+                                            <button class="btn btn-sm btn-outline">Upload Logo</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" value="98525 00001">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="gauravamdenta@gmail.com">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" rows="3">Jagdam College Road, Near SBI Bank
+Chapra, District Saran
+Bihar - 841301</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Dentist Name (for Prescriptions)</label>
+                                    <input type="text" class="form-control" value="Dr. Aditya Gaurav">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Bihar Dental Council Reg.</label>
+                                        <input type="text" class="form-control" value="BDC/2020/12345">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">GSTIN (Optional)</label>
+                                        <input type="text" class="form-control" placeholder="Not registered">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Working Hours</div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Opening Time</label>
+                                        <select class="form-control">
+                                            <option>08:00 AM</option>
+                                            <option selected>09:00 AM</option>
+                                            <option>10:00 AM</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Closing Time</label>
+                                        <select class="form-control">
+                                            <option>05:00 PM</option>
+                                            <option selected>06:00 PM</option>
+                                            <option>07:00 PM</option>
+                                            <option>08:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Appointment Slot Duration</label>
+                                    <select class="form-control">
+                                        <option>15 minutes</option>
+                                        <option selected>30 minutes</option>
+                                        <option>45 minutes</option>
+                                        <option>1 hour</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Working Days</label>
+                                    <div class="flex gap-10" style="flex-wrap: wrap;">
+                                        <label class="radio-item"><input type="checkbox" checked> Mon</label>
+                                        <label class="radio-item"><input type="checkbox" checked> Tue</label>
+                                        <label class="radio-item"><input type="checkbox" checked> Wed</label>
+                                        <label class="radio-item"><input type="checkbox" checked> Thu</label>
+                                        <label class="radio-item"><input type="checkbox" checked> Fri</label>
+                                        <label class="radio-item"><input type="checkbox" checked> Sat</label>
+                                        <label class="radio-item"><input type="checkbox"> Sun</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Localities Configuration -->
+                        <div class="card">
+                            <div class="card-header">📍 Localities / Areas (for Reports)</div>
+                            <div class="card-body">
+                                <p class="text-muted mb-10" style="font-size: 13px;">
+                                    Configure localities/areas for patient statistics. These appear in patient registration and reports.
+                                </p>
+                                <div class="form-group">
+                                    <label class="form-label">Locality Names (one per line)</label>
+                                    <textarea class="form-control" rows="6" placeholder="Enter locality names...">Town Area (Main)
+Block 1 (Nearby)
+Block 2
+Block 3
+Other Areas in District
+Outside District</textarea>
+                                </div>
+                                <p class="text-muted" style="font-size: 12px;">
+                                    Tip: Use names that your staff and patients recognize (e.g., colony names, block names, nearby villages)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary">Reset</button>
+                            <button class="btn btn-primary">💾 Save Changes</button>
+                        </div>
+                    </div>
+
+                    <!-- Backup & System -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">🔒 Backup Configuration</div>
+                            <div class="card-body">
+                                <div class="alert alert-success">
+                                    <span>✅</span>
+                                    Last backup: Today, 6:00 AM (Successful)
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Automatic Backup</label>
+                                    <div class="radio-group">
+                                        <label class="radio-item">
+                                            <input type="radio" name="autobackup" value="on" checked> Enabled
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="autobackup" value="off"> Disabled
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Backup Frequency</label>
+                                    <select class="form-control">
+                                        <option>Every 6 hours</option>
+                                        <option>Every 12 hours</option>
+                                        <option selected>Daily</option>
+                                        <option>Weekly</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Backup Time</label>
+                                    <select class="form-control">
+                                        <option>12:00 AM</option>
+                                        <option>02:00 AM</option>
+                                        <option selected>06:00 AM</option>
+                                        <option>10:00 PM</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Backup Destination</label>
+                                    <div class="radio-group" style="flex-direction: column; gap: 10px;">
+                                        <label class="radio-item">
+                                            <input type="checkbox" checked> Local Folder (C:\DentOS\Backups)
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="checkbox" checked> OneDrive
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="checkbox"> Google Drive
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Backup Retention Period</label>
+                                    <select class="form-control">
+                                        <option>7 days</option>
+                                        <option selected>30 days</option>
+                                        <option>90 days</option>
+                                        <option>1 year</option>
+                                    </select>
+                                    <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                                        Old backup files are deleted after this period to save storage. 
+                                        <strong>Patient data is never deleted</strong> - only old backup copies.
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-10 mt-20">
+                                    <button class="btn btn-primary">🔄 Backup Now</button>
+                                    <button class="btn btn-outline">📥 Restore from Backup</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Backup History</div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Size</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>15 Jan 2024, 6:00 AM</td>
+                                            <td>125 MB</td>
+                                            <td><span class="badge badge-success">Success</span></td>
+                                            <td><a href="#" class="btn btn-sm btn-outline">Restore</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>14 Jan 2024, 6:00 AM</td>
+                                            <td>124 MB</td>
+                                            <td><span class="badge badge-success">Success</span></td>
+                                            <td><a href="#" class="btn btn-sm btn-outline">Restore</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>13 Jan 2024, 6:00 AM</td>
+                                            <td>123 MB</td>
+                                            <td><span class="badge badge-success">Success</span></td>
+                                            <td><a href="#" class="btn btn-sm btn-outline">Restore</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>12 Jan 2024, 6:00 AM</td>
+                                            <td>122 MB</td>
+                                            <td><span class="badge badge-danger">Failed</span></td>
+                                            <td><span class="text-muted">-</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">System Information</div>
+                            <div class="card-body">
+                                <table class="table" style="margin: -20px;">
+                                    <tr>
+                                        <td class="text-muted">Version</td>
+                                        <td>DentOS v1.0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Database</td>
+                                        <td>PostgreSQL 15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Storage Used</td>
+                                        <td>2.3 GB of 50 GB</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Last Sync</td>
+                                        <td>Today, 10:30 AM</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

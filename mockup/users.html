@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .role-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .role-card h4 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .role-card ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+        .role-card li {
+            margin-bottom: 5px;
+        }
+        .role-card.admin {
+            border-left: 4px solid var(--danger);
+        }
+        .role-card.dentist {
+            border-left: 4px solid var(--primary);
+        }
+        .role-card.visiting {
+            border-left: 4px solid var(--success);
+        }
+        .role-card.receptionist {
+            border-left: 4px solid var(--warning);
+        }
+        .discount-limit {
+            background: var(--gray-100);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item active">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search users...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Admin</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">User Management</h1>
+                    <button class="btn btn-primary" onclick="document.getElementById('newUserModal').style.display='block'">+ Add User</button>
+                </div>
+
+                <!-- Settings Tabs -->
+                <div class="tabs">
+                    <a href="settings.html" class="tab">Clinic</a>
+                    <a href="settings.html" class="tab">Backup</a>
+                    <a href="users.html" class="tab active">Users</a>
+                </div>
+
+                <div class="grid-2">
+                    <!-- User List -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header flex-between">
+                                <span>Clinic Users</span>
+                                <span class="badge badge-primary">3 users</span>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="flex gap-10" style="align-items: center;">
+                                                    <div class="avatar" style="width: 35px; height: 35px; font-size: 14px;">AG</div>
+                                                    <div>
+                                                        <strong>Dr. Aditya Gaurav</strong>
+                                                        <div class="text-muted" style="font-size: 11px;">dr.aditya</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-danger">Admin</span>
+                                                <span class="badge badge-primary">Dentist</span>
+                                            </td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="flex gap-10" style="align-items: center;">
+                                                    <div class="avatar" style="width: 35px; height: 35px; font-size: 14px;">PK</div>
+                                                    <div>
+                                                        <strong>Pinki Kumari</strong>
+                                                        <div class="text-muted" style="font-size: 11px;">pinki</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge badge-warning">Receptionist</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Disable</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="flex gap-10" style="align-items: center;">
+                                                    <div class="avatar" style="width: 35px; height: 35px; font-size: 14px;">AS</div>
+                                                    <div>
+                                                        <strong>Dr. Abhay Kumar Singh</strong>
+                                                        <div class="text-muted" style="font-size: 11px;">dr.abhay</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge badge-success">Visiting Dentist</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Disable</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role Descriptions -->
+                    <div>
+                        <div class="card">
+                            <div class="card-header">Role Permissions</div>
+                            <div class="card-body">
+                                <div class="role-card admin">
+                                    <h4>
+                                        <span class="badge badge-danger">Admin</span>
+                                        Owner / Manager
+                                    </h4>
+                                    <ul>
+                                        <li>Full access to all features</li>
+                                        <li>User management & settings</li>
+                                        <li>All reports & analytics</li>
+                                        <li>Backup & restore</li>
+                                        <li><strong>Discount:</strong> <span class="discount-limit">Unlimited</span></li>
+                                    </ul>
+                                </div>
+
+                                <div class="role-card dentist">
+                                    <h4>
+                                        <span class="badge badge-primary">Dentist</span>
+                                        Primary Doctor
+                                    </h4>
+                                    <ul>
+                                        <li>All patient & clinical features</li>
+                                        <li>Consultation, Rx, Treatment plans</li>
+                                        <li>Create invoices & collect payments</li>
+                                        <li>View own reports</li>
+                                        <li><strong>Discount:</strong> <span class="discount-limit">Unlimited</span></li>
+                                    </ul>
+                                </div>
+
+                                <div class="role-card visiting">
+                                    <h4>
+                                        <span class="badge badge-success">Visiting Dentist</span>
+                                        Part-time Doctor
+                                    </h4>
+                                    <ul>
+                                        <li>Clinical features (own patients only)</li>
+                                        <li>Consultation, Rx, Treatment plans</li>
+                                        <li>Create invoices (no discount)</li>
+                                        <li>No access to reports or settings</li>
+                                        <li><strong>Discount:</strong> <span class="discount-limit">Not allowed</span></li>
+                                    </ul>
+                                </div>
+
+                                <div class="role-card receptionist">
+                                    <h4>
+                                        <span class="badge badge-warning">Receptionist</span>
+                                        Front Desk
+                                    </h4>
+                                    <ul>
+                                        <li>Patient registration & search</li>
+                                        <li>Appointments booking</li>
+                                        <li>Billing & payment collection</li>
+                                        <li>Daily collection report (for cash reconciliation)</li>
+                                        <li>No access to monthly reports or doctor-wise data</li>
+                                        <li><strong>Discount:</strong> <span class="discount-limit">Up to 10%</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Permissions Matrix -->
+                <div class="card mt-20">
+                    <div class="card-header">Detailed Permissions Matrix</div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th style="text-align: center;">Admin</th>
+                                    <th style="text-align: center;">Dentist</th>
+                                    <th style="text-align: center;">Visiting</th>
+                                    <th style="text-align: center;">Receptionist</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Register Patient</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Edit Patient</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">Own only</td>
+                                    <td style="text-align: center;">✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Book Appointments</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">Own only</td>
+                                    <td style="text-align: center;">✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Clinical Notes</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">❌</td>
+                                </tr>
+                                <tr>
+                                    <td>Dental Chart</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">View</td>
+                                </tr>
+                                <tr>
+                                    <td>Prescriptions</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">Print</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Invoice</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Apply Discount</td>
+                                    <td style="text-align: center;">✅ Full</td>
+                                    <td style="text-align: center;">✅ Full</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">≤10%</td>
+                                </tr>
+                                <tr>
+                                    <td>Collect Payment</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Daily Collection Report</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">Own only</td>
+                                    <td style="text-align: center;">✅ Today</td>
+                                </tr>
+                                <tr>
+                                    <td>Collection by Doctor</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                </tr>
+                                <tr>
+                                    <td>Monthly/Patient Reports</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                </tr>
+                                <tr>
+                                    <td>User Management</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                </tr>
+                                <tr>
+                                    <td>Settings & Backup</td>
+                                    <td style="text-align: center;">✅</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                    <td style="text-align: center;">❌</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- New User Form -->
+                <div class="card mt-20" id="newUserModal">
+                    <div class="card-header flex-between">
+                        <span>Add New User</span>
+                        <button class="btn btn-sm btn-outline" onclick="document.getElementById('newUserModal').style.display='none'">Close</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name <span class="required">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Username <span class="required">*</span></label>
+                                <input type="text" class="form-control" placeholder="Login username">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Role <span class="required">*</span></label>
+                                <select class="form-control">
+                                    <option>Select role...</option>
+                                    <option>Admin</option>
+                                    <option>Dentist</option>
+                                    <option>Visiting Dentist</option>
+                                    <option>Receptionist</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mobile</label>
+                                <input type="tel" class="form-control" placeholder="Mobile number">
+                            </div>
+                        </div>
+
+                        <!-- Dentist-specific fields -->
+                        <div class="form-row" style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">Registration Number (for Dentists)</label>
+                                <input type="text" class="form-control" placeholder="e.g., BDC/2020/12345">
+                                <small class="text-muted">Required for prescriptions</small>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">Qualification</label>
+                                <input type="text" class="form-control" placeholder="e.g., BDS, MDS">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Password <span class="required">*</span></label>
+                                <input type="password" class="form-control" placeholder="Minimum 8 characters">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password <span class="required">*</span></label>
+                                <input type="password" class="form-control" placeholder="Re-enter password">
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary">+ Create User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing - DentOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🦷 DentOS</h1>
+                <span>Dental Practice Management</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">📊 Dashboard</a>
+                <a href="patients.html" class="nav-item">👥 Patients</a>
+                <a href="appointments.html" class="nav-item">📅 Appointments</a>
+                <a href="billing.html" class="nav-item active">💰 Billing</a>
+                <a href="reports.html" class="nav-item">📈 Reports</a>
+                <a href="settings.html" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search invoices...">
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="name">Dr. Aditya Gaurav</div>
+                        <div class="role">Dentist</div>
+                    </div>
+                    <div class="avatar">AG</div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">Billing</h1>
+                    <a href="invoice-new.html" class="btn btn-primary">➕ New Invoice</a>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card success">
+                        <div class="label">Today's Collections</div>
+                        <div class="value">₹45,000</div>
+                    </div>
+                    <div class="stat-card primary">
+                        <div class="label">This Month</div>
+                        <div class="value">₹3,25,000</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="label">Outstanding</div>
+                        <div class="value">₹1,25,000</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="label">Pending Invoices</div>
+                        <div class="value">23</div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <a href="#" class="tab active">All Invoices</a>
+                    <a href="#" class="tab">Pending</a>
+                    <a href="#" class="tab">Paid</a>
+                    <a href="#" class="tab">Overdue</a>
+                </div>
+
+                <!-- Invoice List -->
+                <div class="card">
+                    <div class="card-body" style="padding: 0;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Patient</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Balance</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000789</a></td>
+                                    <td><a href="patient-profile.html">Ramesh Prasad Yadav</a></td>
+                                    <td>15 Jan 2024</td>
+                                    <td>₹8,000</td>
+                                    <td>₹5,000</td>
+                                    <td class="text-danger">₹3,000</td>
+                                    <td><span class="badge badge-warning">Partial</span></td>
+                                    <td>
+                                        <a href="payment.html" class="btn btn-sm btn-primary">Collect</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000788</a></td>
+                                    <td><a href="patient-profile.html">Sunita Devi</a></td>
+                                    <td>14 Jan 2024</td>
+                                    <td>₹5,000</td>
+                                    <td>₹5,000</td>
+                                    <td class="text-success">₹0</td>
+                                    <td><span class="badge badge-success">Paid</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000787</a></td>
+                                    <td><a href="patient-profile.html">Mukesh Kumar Singh</a></td>
+                                    <td>12 Jan 2024</td>
+                                    <td>₹15,000</td>
+                                    <td>₹6,500</td>
+                                    <td class="text-danger">₹8,500</td>
+                                    <td><span class="badge badge-warning">Partial</span></td>
+                                    <td>
+                                        <a href="payment.html" class="btn btn-sm btn-primary">Collect</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000786</a></td>
+                                    <td><a href="patient-profile.html">Rina Kumari</a></td>
+                                    <td>10 Jan 2024</td>
+                                    <td>₹3,500</td>
+                                    <td>₹3,500</td>
+                                    <td class="text-success">₹0</td>
+                                    <td><span class="badge badge-success">Paid</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000785</a></td>
+                                    <td><a href="patient-profile.html">Ajay Kumar Sharma</a></td>
+                                    <td>08 Jan 2024</td>
+                                    <td>₹12,000</td>
+                                    <td>₹12,000</td>
+                                    <td class="text-success">₹0</td>
+                                    <td><span class="badge badge-success">Paid</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">INV-000784</a></td>
+                                    <td><a href="patient-profile.html">Poonam Devi</a></td>
+                                    <td>05 Jan 2024</td>
+                                    <td>₹7,000</td>
+                                    <td>₹5,000</td>
+                                    <td class="text-danger">₹2,000</td>
+                                    <td><span class="badge badge-danger">Overdue</span></td>
+                                    <td>
+                                        <a href="payment.html" class="btn btn-sm btn-primary">Collect</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex-between mt-20">
+                    <span class="text-muted">Showing 1-6 of 89 invoices</span>
+                    <div class="flex gap-10">
+                        <button class="btn btn-sm btn-outline" disabled>← Previous</button>
+                        <button class="btn btn-sm btn-outline">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
