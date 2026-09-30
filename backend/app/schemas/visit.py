@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, List
 from datetime import date, datetime
 
@@ -29,10 +29,9 @@ class VisitUpdate(BaseModel):
     status: Optional[str] = None
 
 class VisitResponse(VisitBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     visit_id: str
     visit_date: datetime
     status: str
-    
-    class Config:
-        from_attributes = True

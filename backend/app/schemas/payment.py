@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import datetime
 
@@ -14,10 +14,9 @@ class PaymentCreate(PaymentBase):
     received_by: Optional[int] = None
 
 class PaymentResponse(PaymentBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     receipt_id: str
     payment_date: datetime
     received_by: Optional[int] = None
-    
-    class Config:
-        from_attributes = True

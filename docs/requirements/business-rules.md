@@ -20,10 +20,12 @@ This document defines the business rules, validations, calculations, and constra
 | PAT-004 | Mobile Uniqueness | Warning if mobile already exists (not blocked) |
 | PAT-005 | Age Calculation | If DOB provided, age calculated automatically |
 | PAT-006 | Age or DOB | Either DOB or Age must be provided |
-| PAT-007 | Patient Deletion | Patients cannot be deleted, only deactivated |
+| PAT-007 | Patient Deletion | Patients cannot be deleted, only deactivated. **MVP deviation:** hard delete (cascading) is available to Admin only, for clearing test data during the pilot. To be replaced by deactivate/reactivate before go-live. |
 | PAT-008 | Deactivation | Only Admin can deactivate patients |
 | PAT-009 | Reactivation | Deactivated patients can be reactivated by Admin |
 | PAT-010 | Search Minimum | Search requires at least 2 characters |
+
+**Implementation status (MVP):** PAT-001–006 enforced server-side. PAT-004 exposed via `GET /patients/check-mobile`; UI shows a warning with links to the existing patients. PAT-008–010 not yet implemented.
 
 ---
 
@@ -68,8 +70,10 @@ IN_PROGRESS → COMPLETED   (Consultation ends)
 | VIS-003 | Visit Creation | Visit created when consultation starts |
 | VIS-004 | Dentist Required | Visit must be associated with a dentist |
 | VIS-005 | Completion | Visit marked complete when dentist finishes |
-| VIS-006 | Edit Window | Completed visits can be edited within 24 hours |
-| VIS-007 | After Edit Window | After 24 hours, only Admin can edit with audit log |
+| VIS-006 | Edit Window | Completed visits can be edited on the same calendar day they were created |
+| VIS-007 | After Edit Window | After that day, only Admin can edit (audit log: Phase 2) |
+
+**Implementation status (MVP):** VIS-001, 004 (dentist captured from the logged-in session), 006, 007 enforced server-side. VIS-002/003/005 (in-progress status flow) deferred — every visit is saved as `completed` in one step.
 
 ### CHT: Dental Chart Rules
 
@@ -153,11 +157,14 @@ IN_PROGRESS → CANCELLED   (Treatment stopped)
 
 | Condition | Status |
 |-----------|--------|
-| Not yet issued | DRAFT |
-| Issued, no payment | ISSUED |
-| Partial payment received | PARTIALLY_PAID |
-| Full payment received | PAID |
-| Cancelled by Admin | CANCELLED |
+| Issued, no payment | `pending` |
+| Partial payment received | `partial` |
+| Full payment received | `paid` |
+| Cancelled by Admin | `cancelled` (Phase 2) |
+
+There is no draft state in the MVP: an invoice is issued the moment it is saved with the consultation.
+
+**Implementation status (MVP):** INV-001–006, 008, 011 enforced server-side (line amounts are recomputed as `quantity × rate`; client-supplied amounts are ignored). INV-007, 009, 010 deferred.
 
 ### Invoice Calculations
 
@@ -195,6 +202,8 @@ Balance = Total - Amount Paid
 | UPI | Yes | UPI transaction ID |
 | CARD | Yes | Card transaction reference |
 | BANK_TRANSFER | Yes | Bank reference number |
+
+**Implementation status (MVP):** PAY-001–007 enforced server-side; `received_by` is captured from the logged-in session. PAY-008/009 hold by omission (no edit/delete/refund endpoints exist).
 
 ---
 
@@ -239,6 +248,8 @@ Balance = Total - Amount Paid
 | AUTH-003 | Lockout Duration | Lockout for 15 minutes |
 | AUTH-004 | Password Hash | Passwords stored as bcrypt hash |
 | AUTH-005 | Audit Login | All login attempts logged |
+
+**Implementation status (MVP):** AUTH-001 enforced at router level for every non-auth endpoint (covered by `tests/test_security.py`); AUTH-004 enforced. Deactivated users' tokens are rejected. AUTH-002/003/005 and USR-002–008 deferred to the user-management sprint.
 
 ---
 
