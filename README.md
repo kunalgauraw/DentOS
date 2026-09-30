@@ -1,19 +1,20 @@
 # DentOS
 
-**The Operating System for Modern Dental Clinics**
+**Dental Practice Management System**
+
+A standalone Windows application for managing dental clinic operations - patients, consultations, prescriptions, and billing.
 
 ---
 
-## What is DentOS?
+## Features
 
-DentOS is a local-first, cloud-backed Dental Practice Management System (PMS) designed for small dental clinics. It enables clinics to manage patient records, consultations, prescriptions, treatment plans, billing, and documents through a single reliable application.
-
-**Key Features:**
-- Works offline (local-first architecture)
-- Full data ownership
-- Automated backups
-- Role-based access control
-- Print-ready prescriptions, invoices, and receipts
+- **Patient Management** - Register, search, view patient profiles
+- **Consultations** - Clinical notes, vitals, follow-ups
+- **Prescriptions** - Create and print prescriptions
+- **Billing** - Invoices, payments, GST support
+- **Reports** - Daily collection, outstanding payments
+- **Offline-First** - Works without internet
+- **Easy Backup** - Single file database
 
 ---
 
@@ -21,24 +22,19 @@ DentOS is a local-first, cloud-backed Dental Practice Management System (PMS) de
 
 | Phase | Status |
 |-------|--------|
-| Phase 0: Product Definition | In Progress |
-| Phase 1: MVP Development | Not Started |
-| Phase 2: Operational Efficiency | Not Started |
-| Phase 3: Owner Visibility | Not Started |
+| Phase 0: Documentation & Mockup | ✅ Complete |
+| Phase 1: MVP Development | 🔄 In Progress |
+| Phase 2: Production Build | Not Started |
 
 ---
 
-## Documentation
+## Quick Links
 
-| Document | Description |
-|----------|-------------|
-| [Product Vision](docs/product/vision.md) | Why we're building DentOS |
-| [Goals & Success Criteria](docs/product/goals.md) | What success looks like |
-| [Product Scope](docs/product/scope.md) | What's in and out of MVP |
-| [Product Roadmap](docs/product/roadmap.md) | Phased delivery plan |
-| [Requirements (PRD)](docs/requirements/prd.md) | Detailed functional requirements |
-| [Architecture Overview](docs/architecture/overview.md) | System design and tech stack |
-| [Security Model](docs/architecture/security.md) | Authentication, authorization, audit |
+| Resource | Link |
+|----------|------|
+| **Live Mockup** | https://kunalgauraw.github.io/DentOS/mockup/ |
+| **Documentation** | [docs/](docs/) |
+| **Architecture** | [docs/architecture/overview.md](docs/architecture/overview.md) |
 
 ---
 
@@ -46,10 +42,44 @@ DentOS is a local-first, cloud-backed Dental Practice Management System (PMS) de
 
 | Layer | Technology |
 |-------|------------|
-| Frontend | React, TypeScript, Material UI |
+| Frontend | React, TypeScript |
 | Backend | Python, FastAPI |
-| Database | PostgreSQL |
-| Deployment | Docker Compose |
+| Database | SQLite |
+| Desktop | Electron (for .exe) |
+
+---
+
+## Development Setup
+
+### Prerequisites
+
+- Python 3.11+
+- Node.js 18+
+
+### Run Locally
+
+```bash
+# 1. Start Backend
+cd backend
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+
+# 2. Start Frontend (new terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+### Access
+
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:8000
+- **API Docs:** http://localhost:8000/docs
+
+### Default Login
+
+- **Username:** admin
+- **Password:** admin123
 
 ---
 
@@ -59,64 +89,58 @@ DentOS is a local-first, cloud-backed Dental Practice Management System (PMS) de
 DentOS/
 ├── docs/                    # Documentation
 │   ├── product/             # Vision, goals, scope, roadmap
-│   ├── requirements/        # PRD, user stories, business rules
-│   ├── architecture/        # Technical design, API, security
-│   ├── operations/          # Installation, backup, user guides
-│   └── project/             # Release plans, backlog
-├── design/                  # Design artifacts
-│   ├── wireframes/          # UI mockups
-│   ├── workflows/           # Process flow diagrams
-│   └── assets/              # Design source files
-├── frontend/                # React application
+│   ├── requirements/        # PRD, user stories
+│   └── architecture/        # Technical design
+├── mockup/                  # Static HTML mockup
 ├── backend/                 # FastAPI application
-├── database/                # Migrations and seeds
-├── deployment/              # Docker and deployment configs
-├── scripts/                 # Utility scripts
-└── tests/                   # Integration and E2E tests
+│   ├── app/
+│   │   ├── models/          # SQLAlchemy models
+│   │   ├── routes/          # API endpoints
+│   │   ├── schemas/         # Pydantic schemas
+│   │   └── core/            # Config, security
+│   └── requirements.txt
+├── frontend/                # React application
+│   ├── src/
+│   │   ├── pages/           # Page components
+│   │   ├── components/      # Shared components
+│   │   ├── services/        # API client
+│   │   └── context/         # Auth context
+│   └── package.json
+└── data/                    # SQLite database (gitignored)
 ```
 
 ---
 
-## Getting Started
+## Production Build
 
-### Prerequisites
-
-- Docker Desktop
-- Git
-
-### Development Setup
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd DentOS
-
-# Start development environment
-docker-compose up
-
-# Access the application
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:8000
-# API Docs: http://localhost:8000/docs
-```
+The final product will be a standalone Windows installer (`DentOS-Setup.exe`) that:
+- Runs without Python/Node installed
+- Uses embedded SQLite database
+- Works completely offline
+- Easy backup (copy single file)
 
 ---
 
-## Contributing
+## Documentation
 
-1. Read the [Product Vision](docs/product/vision.md)
-2. Check the [Roadmap](docs/product/roadmap.md) for current priorities
-3. Review [Architecture](docs/architecture/overview.md) before making changes
-4. Follow the coding standards (TBD)
+| Document | Description |
+|----------|-------------|
+| [Product Vision](docs/product/vision.md) | Why we're building DentOS |
+| [Product Scope](docs/product/scope.md) | MVP features |
+| [Architecture](docs/architecture/overview.md) | System design |
+| [Database Schema](docs/architecture/database-schema.md) | Data model |
+| [API Spec](docs/architecture/api-spec.md) | REST endpoints |
 
 ---
 
 ## License
 
-TBD
+Proprietary - Gauravam Denta Clinic
 
 ---
 
 ## Contact
 
-TBD
+Dr. Aditya Gaurav  
+Gauravam Dental Clinic  
+Chapra, Bihar

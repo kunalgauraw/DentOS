@@ -4,7 +4,15 @@
 
 ## Overview
 
-This document defines the PostgreSQL database schema for DentOS.
+This document defines the SQLite database schema for DentOS.
+
+**Database File:** `C:\DentOS\data\dentos.db`
+
+**Why SQLite?**
+- No separate database server needed
+- Single file = easy backup and restore
+- Perfect for single-clinic use (handles thousands of patients)
+- Embedded in the application
 
 ---
 
